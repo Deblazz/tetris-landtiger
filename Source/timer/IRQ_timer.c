@@ -10,6 +10,7 @@
 #include <string.h>
 #include "LPC17xx.h"
 #include "timer.h"
+#include "Game/game.h"
 /******************************************************************************
 ** Function name:		Timer0_IRQHandler
 **
@@ -22,6 +23,7 @@
 
 void TIMER0_IRQHandler (void)
 {
+	//Do nothing
   LPC_TIM0->IR = 1;			/* clear interrupt flag */
   return;
 }
@@ -39,6 +41,10 @@ void TIMER0_IRQHandler (void)
 void TIMER1_IRQHandler (void)
 {
   LPC_TIM1->IR = 1;			/* clear interrupt flag */
+	if(gameStatus==1){
+		//During play
+		movePieceDown();
+	}
   return;
 }
 

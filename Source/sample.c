@@ -47,23 +47,10 @@ int main(void)
 	initGame();
 	genRandomTetromino();
 	updateUI(newTetrominoXpos, newTetrominoYpos);
-	//drawTetromino(10, 10, 0);   // O
-	//drawTetromino(10, 90, 1);   // I
-	//drawTetromino(10, 170, 2);  // T
-	//drawTetromino(10, 250, 3);  // J
-
-	//drawTetromino(100, 10, 4);  // L
-	//drawTetromino(100, 90, 5);  // S
-	//drawTetromino(100, 170, 6); // Z
-	//GUI_Text(0, 280, (uint8_t *) " touch here : 1 sec to clear  ", Red, White);
-	//LCD_DrawLine(0, 0, 200, 200, White);
-	//init_timer(0, 0x1312D0 ); 						/* 50ms * 25MHz = 1.25*10^6 = 0x1312D0 */
-	//init_timer(0, 0x6108 ); 						  /* 1ms * 25MHz = 25*10^3 = 0x6108 */
-	//init_timer(0, 0x4E2 ); 						    /* 500us * 25MHz = 1.25*10^3 = 0x4E2 */
-	init_timer(0, 0xC8 ); 						    /* 8us * 25MHz = 200 ~= 0xC8 */
 	
-	enable_timer(0);
+	init_timer(1, 0x017D7840);
 	
+	enable_timer(1);
 	LPC_SC->PCON |= 0x1;									/* power-down	mode										*/
 	LPC_SC->PCON &= ~(0x2);						
 	

@@ -138,7 +138,7 @@ void initUI()
 
 void updateUI(uint8_t Xpos, uint8_t Ypos)
 {
-    //drawGameField(); TODO CALL WHEN LINE EMPTIED
+    drawGameField();
     drawNewTetromino(Xpos, Ypos);
 }
 
@@ -146,17 +146,17 @@ void drawGameField()
 {
     int i, j;
 
-    for (i = 0; i < 10; i++)
+    for (i = 0; i < 20; i++)
     {
-        for (j = 0; j < 20; j++)
+        for (j = 0; j < 10; j++)
         {
             if (gameField[i][j])
             {
-                drawTetrominoSprite(2 + i * BLOCK_PIECE_WIDTH, 18 + j * BLOCK_PIECE_HEIGHT, TETROMINOS[gameField[i][j]].color);
+                drawTetrominoSprite(2 + j * BLOCK_PIECE_WIDTH, 18 + i * BLOCK_PIECE_HEIGHT, TETROMINOS[gameField[i][j]].color);
             }
             else
             {
-                LCD_FillRect(2 + i * BLOCK_PIECE_WIDTH, 18 + j * BLOCK_PIECE_HEIGHT, BLOCK_PIECE_WIDTH, BLOCK_PIECE_HEIGHT, Black);
+                LCD_FillRect(2 + j * BLOCK_PIECE_WIDTH, 18 + i * BLOCK_PIECE_HEIGHT, BLOCK_PIECE_WIDTH, BLOCK_PIECE_HEIGHT, Black);
             }
         }
     }

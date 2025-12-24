@@ -58,29 +58,29 @@ static const Tetromino TETROMINOS[8] = {
         Magenta // Color associated based on shape
     },
     {
-        {{0, 0, 3, 0},
-         {3, 3, 3, 0},
+        {{0, 0, 4, 0},
+         {4, 4, 4, 0},
          {0, 0, 0, 0},
          {0, 0, 0, 0}},
         Orange // Color associated based on shape
     },
     {
-        {{4, 0, 0, 0},
-         {4, 4, 4, 0},
+        {{5, 0, 0, 0},
+         {5, 5, 5, 0},
          {0, 0, 0, 0},
          {0, 0, 0, 0}},
         Blue // Color associated based on shape
     },
     {
-        {{0, 5, 5, 0},
-         {5, 5, 0, 0},
+        {{0, 6, 6, 0},
+         {6, 6, 0, 0},
          {0, 0, 0, 0},
          {0, 0, 0, 0}},
         Green // Color associated based on shape
     },
     {
-        {{6, 6, 0, 0},
-         {0, 6, 6, 0},
+        {{7, 7, 0, 0},
+         {0, 7, 7, 0},
          {0, 0, 0, 0},
          {0, 0, 0, 0}},
         Red // Color associated based on shape

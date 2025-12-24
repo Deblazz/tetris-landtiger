@@ -11,7 +11,7 @@ typedef enum{
 	
 } GameStatus;
 
-extern uint8_t gameField[10][20]; 
+extern uint8_t gameField[20][10]; 
 extern uint8_t newTetromino[4][4];
 extern uint8_t newTetrominoXpos;
 extern uint8_t newTetrominoYpos;
@@ -24,5 +24,7 @@ extern volatile GameStatus gameStatus;
 
 void initGame(void);
 void genRandomTetromino();
+extern uint8_t checkContact();
+void lockTetromino();
 
 #endif
