@@ -1,35 +1,5 @@
 #include "graphics.h"
 #include "game.h"
-/*Function used to draw a given tetramino at a given position. Wrapper of drawTetrominoShape*/
-void drawTetromino(uint16_t x, uint16_t y, uint8_t tetromino_num)
-{
-
-    switch (tetromino_num)
-    {
-    case 0:
-        drawTetrominoShape(x, y, 0, 0);
-        break;
-    case 1:
-        drawTetrominoShape(x, y, 1, 0);
-        break;
-    case 2:
-        drawTetrominoShape(x, y, 2, 0);
-        break;
-    case 3:
-        drawTetrominoShape(x, y, 3, 0);
-        break;
-    case 4:
-        drawTetrominoShape(x, y, 4, 0);
-        break;
-    case 5:
-        drawTetrominoShape(x, y, 5, 0);
-        break;
-    case 6:
-        drawTetrominoShape(x, y, 6, 0);
-        break;
-    }
-}
-
 
 void drawTetrominoShape(uint16_t x, uint16_t y, TetrominoType type, uint8_t rotation){
     const Tetromino* tetromino = &TETROMINOS[type];
@@ -38,7 +8,7 @@ void drawTetrominoShape(uint16_t x, uint16_t y, TetrominoType type, uint8_t rota
 
     for (i = 0; i < 4; i++) {
         for (j = 0; j < 4; j++) {
-            if (tetromino->cells[i][j]) {
+            if (tetromino->cells[rotation][i][j]) {
                 // Draw the block at the calculated position
                             drawTetrominoSprite(x + j * block_size, y + i * block_size, tetromino->color);
             }
@@ -77,28 +47,16 @@ void drawTetrominoSprite(uint16_t x, uint16_t y, uint16_t color_filter)
     {
         for (i = 0; i < BLOCK_PIECE_WIDTH; i++)
         {
-            // 2. Leggiamo il pixel dallo sprite ORIGINALE (Giallo/Vetro)
             uint8_t low = BLOCK_PIECE_PIXEL_DATA[index];
             uint8_t high = BLOCK_PIECE_PIXEL_DATA[index + 1];
             uint16_t src_pixel = (high << 8) | low;
 
-            // 3. Calcoliamo la LUMINOSIT� del pixel originale.
-            // Il trucco: siccome il tuo sprite � giallo, usiamo il canale VERDE come riferimento di luminosit�.
-            // Il verde in RGB565 ha 6 bit (0-63), quindi � il pi� preciso.
-            uint16_t intensity = (src_pixel >> 5) & 0x3F; // Valore 0 (scuro) -> 63 (massima luce)
+            uint16_t intensity = (src_pixel >> 5) & 0x3F;
 
-            // 4. CALCOLO MATEMATICO (TINTING)
-            // Nuova componente = (ComponenteColore * Intensit�Pixel) / MaxIntensit�
-            // Questo preserva le ombre!
-
-            // Calcolo Rosso
             uint16_t r_new = (r_tint * intensity) / 63;
-            // Calcolo Verde
             uint16_t g_new = (g_tint * intensity) / 63;
-            // Calcolo Blu
             uint16_t b_new = (b_tint * intensity) / 63;
 
-            // 5. Ricomponiamo il pixel
             uint16_t final_color = (r_new << 11) | (g_new << 5) | b_new;
 
             LCD_SetPoint(x + i, y + j, final_color);
@@ -132,7 +90,7 @@ void drawSprite(uint16_t x, uint16_t y, uint16_t w, uint16_t h, uint8_t *pixel_s
 void initUI()
 {
     drawInfoUI();
-    drawGameField();
+	//drawGameField(); TODO:Check if unnecessary
 		drawStartGameMessage();
 }
 
@@ -140,6 +98,22 @@ void updateUI(uint8_t Xpos, uint8_t Ypos)
 {
     drawGameField();
     drawNewTetromino(Xpos, Ypos);
+}
+
+void clearTetromino(uint8_t newTetrominoXpos, uint8_t newTetrominoYpos){
+		uint8_t i, j;  
+
+    for(i = 0; i < 4; i++) {
+        for(j = 0; j < 4; j++) {
+						if(newTetromino[i][j]) {
+                
+                uint16_t px = 2 + (newTetrominoXpos + j) * BLOCK_PIECE_WIDTH;
+                uint16_t py = 18 + (newTetrominoYpos + i) * BLOCK_PIECE_HEIGHT;
+                
+                LCD_FillRect(px, py, BLOCK_PIECE_WIDTH, BLOCK_PIECE_HEIGHT, Black);
+            }
+        }
+    }
 }
 
 void drawGameField()
@@ -186,4 +160,10 @@ void drawStartGameMessage(){
 	GUI_Text(30, 100, (uint8_t *)"TETRIS", White, Black);
 	GUI_Text(30, 120, (uint8_t *)"Press KEY1", White, Black);
 	GUI_Text(30, 140, (uint8_t *)"to start game", White, Black);
+}
+
+void drawUpdateScore(){
+	  char buffer[20];
+    sprintf(buffer, "%lu", (unsigned long)currentScore);
+    GUI_Text(160, 100, (uint8_t *)buffer, White, Blue_UI);
 }

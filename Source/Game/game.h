@@ -15,6 +15,7 @@ extern uint8_t gameField[20][10];
 extern uint8_t newTetromino[4][4];
 extern uint8_t newTetrominoXpos;
 extern uint8_t newTetrominoYpos;
+extern uint8_t newTetrominoRotation;
 extern uint32_t topScore;
 extern uint32_t currentScore;
 extern uint16_t clearedRows;
@@ -22,9 +23,12 @@ extern volatile GameStatus gameStatus;
 
 
 
-void initGame(void);
+void initGame();
+void endGame();
 void genRandomTetromino();
 extern uint8_t checkContact();
 void lockTetromino();
-
+void rotateTetromino();
+void moveRight();
+void moveLeftt();
 #endif

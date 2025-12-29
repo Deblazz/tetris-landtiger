@@ -45,18 +45,9 @@ int main(void)
 	LCD_Clear(Black);
 	
 	initGame();
-	genRandomTetromino();
-	updateUI(newTetrominoXpos, newTetrominoYpos);
-	
-	init_timer(1, 0x017D7840);
-	
-	enable_timer(1);
-	LPC_SC->PCON |= 0x1;									/* power-down	mode										*/
-	LPC_SC->PCON &= ~(0x2);						
 	
   while (1)	
   {
-		__ASM("wfi");
   }
 }
 

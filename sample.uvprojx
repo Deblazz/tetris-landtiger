@@ -16,8 +16,8 @@
         <TargetCommonOption>
           <Device>LPC1768</Device>
           <Vendor>NXP</Vendor>
-          <PackID>Keil.LPC1700_DFP.2.6.0</PackID>
-          <PackURL>http://www.keil.com/pack/</PackURL>
+          <PackID>Keil.LPC1700_DFP.2.7.2</PackID>
+          <PackURL>https://www.keil.com/pack/</PackURL>
           <Cpu>IRAM(0x10000000,0x8000) IRAM2(0x2007C000,0x8000) IROM(0x00000000,0x80000) CPUTYPE("Cortex-M3") CLOCK(12000000) ELITTLE</Cpu>
           <FlashUtilSpec></FlashUtilSpec>
           <StartupFile></StartupFile>
@@ -674,6 +674,41 @@
           </Files>
         </Group>
         <Group>
+          <GroupName>RIT</GroupName>
+          <Files>
+            <File>
+              <FileName>IRQ_RIT.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\Source\RIT\IRQ_RIT.c</FilePath>
+            </File>
+            <File>
+              <FileName>lib_RIT.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\Source\RIT\lib_RIT.c</FilePath>
+            </File>
+            <File>
+              <FileName>RIT.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\RIT.h</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>joystick</GroupName>
+          <Files>
+            <File>
+              <FileName>funct_joystick.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\Source\joystick\funct_joystick.c</FilePath>
+            </File>
+            <File>
+              <FileName>lib_joystick.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\Source\joystick\lib_joystick.c</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
           <GroupName>::CMSIS</GroupName>
         </Group>
       </Groups>
@@ -689,8 +724,8 @@
         <TargetCommonOption>
           <Device>LPC1768</Device>
           <Vendor>NXP</Vendor>
-          <PackID>Keil.LPC1700_DFP.2.6.0</PackID>
-          <PackURL>http://www.keil.com/pack/</PackURL>
+          <PackID>Keil.LPC1700_DFP.2.7.2</PackID>
+          <PackURL>https://www.keil.com/pack/</PackURL>
           <Cpu>IRAM(0x10000000,0x8000) IRAM2(0x2007C000,0x8000) IROM(0x00000000,0x80000) CPUTYPE("Cortex-M3") CLOCK(12000000) ELITTLE</Cpu>
           <FlashUtilSpec></FlashUtilSpec>
           <StartupFile></StartupFile>
@@ -1292,6 +1327,41 @@
               <FileName>lib_button.c</FileName>
               <FileType>1</FileType>
               <FilePath>.\Source\button_EXINT\lib_button.c</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>RIT</GroupName>
+          <Files>
+            <File>
+              <FileName>IRQ_RIT.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\Source\RIT\IRQ_RIT.c</FilePath>
+            </File>
+            <File>
+              <FileName>lib_RIT.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\Source\RIT\lib_RIT.c</FilePath>
+            </File>
+            <File>
+              <FileName>RIT.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\RIT.h</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>joystick</GroupName>
+          <Files>
+            <File>
+              <FileName>funct_joystick.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\Source\joystick\funct_joystick.c</FilePath>
+            </File>
+            <File>
+              <FileName>lib_joystick.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\Source\joystick\lib_joystick.c</FilePath>
             </File>
           </Files>
         </Group>
