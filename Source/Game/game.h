@@ -26,7 +26,7 @@ extern volatile GameStatus gameStatus;
 void initGame();
 void endGame();
 void genRandomTetromino();
-extern uint8_t checkContact();
+uint8_t checkContact();
 void lockTetromino();
 void rotateTetromino();
 void moveRight();

@@ -20,25 +20,23 @@ void initGame()
 		init_timer(0, 0xFFFFFFFF); //Counts how long until unpause
 		enable_timer(0);
 		
-		//For joystick polling, 50ms
-		init_RIT(0x004C4B40);
-		enable_RIT();
     // Init the whole 2d array to 0
     memset(gameField, 0, sizeof(gameField));
     topScore = 0;
     currentScore = 0;
     clearedRows = 0;
-		gameStatus = 0;		
+		gameStatus = 2;		
     initUI();
-	
-		while(!gameStatus){/*Do nothing*/};
+
+		while(gameStatus == 2){
+			__WFI(); // "Wait For Interrupt"
+		}
 		
 		disable_timer(0);
 		//Gamestatus is Play
 		ticksTaken = get_timer_value(0); //Get time taken so that I can init the random seed generator
 		reset_timer(0); //I free the timer
 		srand(ticksTaken); //Init seed
-		
 		
 		//drawGameField(); Instead of redrawing the whole playing field i can simply "write out" the start message
 		LCD_FillRect(30, 100, 110, 150, Black);
@@ -47,6 +45,10 @@ void initGame()
 		init_timer(1, 0x017D7840);
 		enable_timer(1);
 	
+		//For joystick polling, 50ms
+		init_RIT(0x000927C0);
+		enable_RIT();
+		
 		genRandomTetromino();
 		updateUI(newTetrominoXpos, newTetrominoYpos);
 }
@@ -163,3 +165,16 @@ void moveLeft(){
 	newTetrominoXpos = nextTetrominoXPos;
   drawNewTetromino(newTetrominoXpos, newTetrominoYpos);
 }
+
+void pauseGame(){
+	disable_RIT();
+	disable_timer(1);
+	drawPausedGame();
+}
+
+void unpauseGame(){
+	updateUI(newTetrominoXpos, newTetrominoYpos);
+	enable_RIT();
+	enable_timer(1);
+}
+

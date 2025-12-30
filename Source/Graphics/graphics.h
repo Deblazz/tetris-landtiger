@@ -120,4 +120,5 @@ void updateUI(uint8_t Xpos, uint8_t Ypos);
 void drawGameField();
 void drawInfoUI();
 void drawStartGameMessage();
+void drawPausedGame();
 #endif

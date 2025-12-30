@@ -167,3 +167,9 @@ void drawUpdateScore(){
     sprintf(buffer, "%lu", (unsigned long)currentScore);
     GUI_Text(160, 100, (uint8_t *)buffer, White, Blue_UI);
 }
+
+void drawPausedGame(){
+	GUI_Text(30, 100, (uint8_t *)"GAME PAUSED", White, Black);
+	GUI_Text(30, 120, (uint8_t *)"Press KEY1", White, Black);
+	GUI_Text(30, 140, (uint8_t *)"to play", White, Black);
+}

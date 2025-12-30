@@ -41,7 +41,7 @@ void TIMER0_IRQHandler (void)
 void TIMER1_IRQHandler (void)
 {
   LPC_TIM1->IR = 1;			/* clear interrupt flag */
-	if(gameStatus==1){
+	if(gameStatus==1){ //Timer 1 is disabled during pause, this is just for added safety
 		//During play
 		movePieceDown();
 	}

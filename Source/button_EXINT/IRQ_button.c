@@ -12,11 +12,17 @@ void EINT0_IRQHandler (void)	  	/* INT0														 */
 
 void EINT1_IRQHandler (void)	  	/* KEY1														 */
 {
+	//0: pause, 1: play, 2: startup
 	LPC_SC->EXTINT &= (1 << 1);     /* clear pending interrupt         */
 	if(gameStatus == 0){
 		gameStatus = 1;
+		unpauseGame();
 	}else if(gameStatus == 1){
 		gameStatus = 0;
+		pauseGame();
+	}else if(gameStatus == 2){
+		//Startup
+		gameStatus = 1; //Play
 	}
 	
 	
