@@ -33,8 +33,8 @@ void EINT1_IRQHandler (void)	  	/* KEY1														 */
 
 void EINT2_IRQHandler (void)	  	/* KEY2														 */
 {
-	
   LPC_SC->EXTINT &= (1 << 2);     /* clear pending interrupt         */    
+	dropTetromino();
 }
 
 

@@ -31,4 +31,6 @@ void lockTetromino();
 void rotateTetromino();
 void moveRight();
 void moveLeftt();
+void dropTetromino();
+uint8_t isPositionValid(uint8_t newTetrominoXpos, uint8_t newTetrominoYpos, const uint8_t newTetromino[4][4]);
 #endif

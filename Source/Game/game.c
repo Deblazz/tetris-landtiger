@@ -64,43 +64,30 @@ void genRandomTetromino()
 }
 
 void movePieceDown(){
-	clearTetromino(newTetrominoXpos, newTetrominoYpos);
 	
-	newTetrominoYpos += 1;
-	
-	uint8_t contact = checkContact();
-	if(contact){
+	if(checkContact()){
 		//Fix it on the gaming board and spawn a new block
-		drawNewTetromino(newTetrominoXpos, newTetrominoYpos);
 		lockTetromino();
 	}else{
+		clearTetromino(newTetrominoXpos, newTetrominoYpos);
+		newTetrominoYpos += 1;
 		drawNewTetromino(newTetrominoXpos, newTetrominoYpos);
 	}
 }
 
 uint8_t checkContact(){
-	uint8_t i, j, contact = 0;
-	
-	for(i = 0; i < 4 && !contact; i++){
-		for(j = 0; j < 4 && !contact; j++){
-			if(newTetromino[i][j]){
-				//I check for contact only if there is a block in the current position
-				if(newTetrominoYpos+i+1 >= 20){
-					//Reached the bottom
-					contact = 1;
-				}else if(gameField[newTetrominoYpos + i + 1][newTetrominoXpos + j]){
-					//Touching another element
-					contact = 1;
-			}
-		}
-	}
-}
-
-	return contact;
+if (isPositionValid(newTetrominoXpos, newTetrominoYpos + 1, newTetromino)) {
+        return 0;
+    } else {
+        return 1;
+    }
 }
 
 void lockTetromino(){
 	uint8_t i, j;
+	disable_timer(1);
+	disable_timer(2);
+	
 	//Raise score
 	currentScore+=10;
 	drawUpdateScore();
@@ -125,6 +112,9 @@ void lockTetromino(){
 	
 	updateUI(newTetrominoXpos, newTetrominoYpos);
 	
+	reset_timer(1);
+	enable_timer(1);
+	enable_timer(2);
 	//Second lose condition, the piece touches as soon as spawn
 	if (checkContact()) {
 		endGame();
@@ -142,28 +132,30 @@ void endGame(){
 void rotateTetromino(){
 	uint8_t nextRotation = newTetrominoRotation + 1;
 	if(nextRotation > 3) nextRotation = 0;
-	clearTetromino(newTetrominoXpos, newTetrominoYpos);
-  memcpy(newTetromino, TETROMINOS[newTetrominoType].cells[nextRotation], sizeof(newTetromino));
-  newTetrominoRotation = nextRotation;
-  drawNewTetromino(newTetrominoXpos, newTetrominoYpos);
+	if(isPositionValid(newTetrominoXpos, newTetrominoYpos, TETROMINOS[newTetrominoType].cells[nextRotation])){
+		clearTetromino(newTetrominoXpos, newTetrominoYpos);
+    newTetrominoRotation = nextRotation;
+    memcpy(newTetromino, TETROMINOS[newTetrominoType].cells[newTetrominoRotation], sizeof(newTetromino));
+    drawNewTetromino(newTetrominoXpos, newTetrominoYpos);
+  }
 }
 
 void moveRight(){
 	uint8_t nextTetrominoXPos = newTetrominoXpos+1;
-	if(nextTetrominoXPos == 20){nextTetrominoXPos = 19;}
-	clearTetromino(newTetrominoXpos, newTetrominoYpos);
-	memcpy(newTetromino, TETROMINOS[newTetrominoType].cells[newTetrominoRotation], sizeof(newTetromino));
-	newTetrominoXpos = nextTetrominoXPos;
-  drawNewTetromino(newTetrominoXpos, newTetrominoYpos);
+	if (isPositionValid(nextTetrominoXPos, newTetrominoYpos, newTetromino)){
+		clearTetromino(newTetrominoXpos, newTetrominoYpos);
+    newTetrominoXpos = nextTetrominoXPos;
+    drawNewTetromino(newTetrominoXpos, newTetrominoYpos);
+  }
 }
 
 void moveLeft(){
 	uint8_t nextTetrominoXPos = newTetrominoXpos-1;
-	if(nextTetrominoXPos <= 0){nextTetrominoXPos = 0;}
-	clearTetromino(newTetrominoXpos, newTetrominoYpos);
-	memcpy(newTetromino, TETROMINOS[newTetrominoType].cells[newTetrominoRotation], sizeof(newTetromino));
-	newTetrominoXpos = nextTetrominoXPos;
-  drawNewTetromino(newTetrominoXpos, newTetrominoYpos);
+	if (isPositionValid(nextTetrominoXPos, newTetrominoYpos, newTetromino)){
+		clearTetromino(newTetrominoXpos, newTetrominoYpos);
+    newTetrominoXpos = nextTetrominoXPos;
+    drawNewTetromino(newTetrominoXpos, newTetrominoYpos);
+  }
 }
 
 void pauseGame(){
@@ -174,7 +166,37 @@ void pauseGame(){
 
 void unpauseGame(){
 	updateUI(newTetrominoXpos, newTetrominoYpos);
-	disable_timer(2);
+	enable_timer(2);
 	enable_timer(1);
+}
+
+void dropTetromino(){
+	disable_timer(1);
+  disable_timer(2);
+	clearTetromino(newTetrominoXpos, newTetrominoYpos);
+	while(!checkContact()){	
+		newTetrominoYpos += 1;
+	}
+	drawNewTetromino(newTetrominoXpos, newTetrominoYpos);
+  lockTetromino();
+}
+
+uint8_t isPositionValid(uint8_t newTetrominoXpos, uint8_t newTetrominoYpos, const uint8_t newTetromino[4][4]){
+	int i, j;
+	for(i = 0; i < 4; i++){
+		for(j = 0; j < 4; j++){
+			if(newTetromino[i][j] > 0){
+				uint8_t absX = newTetrominoXpos + j;
+				uint8_t absY = newTetrominoYpos + i;
+				
+				if(absX < 0 || absX >= 10 || absY < 0) return 0;
+				
+				if(absY >=20) return 0;
+				
+				if(gameField[absY][absX] > 0) return 0;
+			}
+		}
+	}
+	return 1;	
 }
 
