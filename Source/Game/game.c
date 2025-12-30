@@ -46,8 +46,8 @@ void initGame()
 		enable_timer(1);
 	
 		//For joystick polling, 50ms
-		init_RIT(0x000927C0);
-		enable_RIT();
+		init_timer(2, 0x000927C0);
+		enable_timer(2);
 		
 		genRandomTetromino();
 		updateUI(newTetrominoXpos, newTetrominoYpos);
@@ -167,14 +167,14 @@ void moveLeft(){
 }
 
 void pauseGame(){
-	disable_RIT();
+	disable_timer(2);
 	disable_timer(1);
 	drawPausedGame();
 }
 
 void unpauseGame(){
 	updateUI(newTetrominoXpos, newTetrominoYpos);
-	enable_RIT();
+	disable_timer(2);
 	enable_timer(1);
 }
 

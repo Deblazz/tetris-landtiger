@@ -48,6 +48,36 @@ void TIMER1_IRQHandler (void)
   return;
 }
 
+void TIMER2_IRQHandler (void)
+{
+	LPC_TIM2->IR = 1;
+	static int down_counter = 0;
+    if((LPC_GPIO1->FIOPIN & (1<<29)) == 0){	
+            rotateTetromino();
+    }else if((LPC_GPIO1->FIOPIN & (1<<28)) == 0){
+				//Right 
+				moveRight();
+			}else if((LPC_GPIO1->FIOPIN & (1<<27)) == 0){
+				//Left
+				moveLeft();
+			}else if((LPC_GPIO1->FIOPIN & (1<<26)) == 0){	
+        down_counter++;
+        
+        //How many rit cycles needed for a down movement
+        if(down_counter >= 2){ 
+					movePieceDown(); 
+          down_counter = 0;
+					
+					//Block timer so not to have repetitions
+					reset_timer(1);
+					enable_timer(1);
+        }
+    }
+    else{
+        down_counter = 0;
+    } 
+}
+
 /******************************************************************************
 **                            End Of File
 ******************************************************************************/
