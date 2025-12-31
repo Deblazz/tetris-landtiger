@@ -621,6 +621,11 @@
               <FileType>5</FileType>
               <FilePath>.\Source\Sprites\block_piece.h</FilePath>
             </File>
+            <File>
+              <FileName>saintbasil.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\Source\Sprites\saintbasil.h</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -1257,6 +1262,11 @@
               <FileName>block_piece.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\Source\Sprites\block_piece.h</FilePath>
+            </File>
+            <File>
+              <FileName>saintbasil.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\Source\Sprites\saintbasil.h</FilePath>
             </File>
           </Files>
         </Group>

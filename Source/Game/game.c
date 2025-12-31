@@ -3,8 +3,8 @@
 #include "RIT/RIT.h"
 uint8_t gameField[20][10];
 uint8_t newTetromino[4][4];
-uint8_t newTetrominoXpos;
-uint8_t newTetrominoYpos;
+int newTetrominoXpos;
+int newTetrominoYpos;
 uint8_t newTetrominoRotation;
 uint8_t newTetrominoType;
 // Probably can use 16, 16, 8 bits. Using this setup to address top players.
@@ -100,6 +100,8 @@ void lockTetromino(){
 		}
 	}
 	
+	checkAndClearRows();
+	
 	//First lose condition, the piece sits perfectly on top with no more space
 	if (newTetrominoYpos <= 0) { 
         endGame();
@@ -141,7 +143,7 @@ void rotateTetromino(){
 }
 
 void moveRight(){
-	uint8_t nextTetrominoXPos = newTetrominoXpos+1;
+	int nextTetrominoXPos = newTetrominoXpos+1;
 	if (isPositionValid(nextTetrominoXPos, newTetrominoYpos, newTetromino)){
 		clearTetromino(newTetrominoXpos, newTetrominoYpos);
     newTetrominoXpos = nextTetrominoXPos;
@@ -150,7 +152,7 @@ void moveRight(){
 }
 
 void moveLeft(){
-	uint8_t nextTetrominoXPos = newTetrominoXpos-1;
+	int nextTetrominoXPos = newTetrominoXpos-1;
 	if (isPositionValid(nextTetrominoXPos, newTetrominoYpos, newTetromino)){
 		clearTetromino(newTetrominoXpos, newTetrominoYpos);
     newTetrominoXpos = nextTetrominoXPos;
@@ -181,13 +183,13 @@ void dropTetromino(){
   lockTetromino();
 }
 
-uint8_t isPositionValid(uint8_t newTetrominoXpos, uint8_t newTetrominoYpos, const uint8_t newTetromino[4][4]){
+uint8_t isPositionValid(int newTetrominoXpos, int newTetrominoYpos, const uint8_t newTetromino[4][4]){
 	int i, j;
 	for(i = 0; i < 4; i++){
 		for(j = 0; j < 4; j++){
 			if(newTetromino[i][j] > 0){
-				uint8_t absX = newTetrominoXpos + j;
-				uint8_t absY = newTetrominoYpos + i;
+				int absX = newTetrominoXpos + j;
+				int absY = newTetrominoYpos + i;
 				
 				if(absX < 0 || absX >= 10 || absY < 0) return 0;
 				
@@ -200,3 +202,58 @@ uint8_t isPositionValid(uint8_t newTetrominoXpos, uint8_t newTetrominoYpos, cons
 	return 1;	
 }
 
+void checkAndClearRows(){
+	int i, j, k, rowsCleared = 0, rowIsFull;
+	
+	for (i = 0; i < 20; i++) {
+		rowIsFull = 1;
+    for (j = 0; j < 10; j++) {
+			if (gameField[i][j] == 0) {
+				rowIsFull = 0;
+        break;
+      }
+    }
+		
+		if(rowIsFull){
+			rowsCleared++;
+			
+			//Show black line
+			LCD_FillRect(2, 18 + i * BLOCK_PIECE_HEIGHT, 10 * BLOCK_PIECE_WIDTH, BLOCK_PIECE_HEIGHT, Black);
+		}
+	}
+	if (rowsCleared == 0) return; //No need to redraw anything
+	//Shift down
+	
+	for(i = 19; i >= 0; i--){
+		rowIsFull = 1;
+		for(j = 0; j < 10; j++){
+			if(gameField[i][j] == 0){
+				rowIsFull = 0;
+				break;
+			}
+		}
+	
+	if(rowIsFull){
+		for(k = i; k > 0; k--){
+			for(j = 0; j < 10; j++){
+				gameField[k][j] = gameField[k-1][j];
+			}
+		}
+		
+		for(j = 0; j < 10; j++){
+			gameField[0][j] = 0;
+		}
+		i++;
+	}
+}
+	if(rowsCleared == 4){
+		//tetris
+		currentScore += 600;
+	}else{
+		currentScore += rowsCleared * 100;
+	}
+	
+	clearedRows += rowsCleared;
+	updateScores();
+	drawGameField();
+}

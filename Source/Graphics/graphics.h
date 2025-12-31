@@ -7,7 +7,8 @@
 
 /*Include every asset to draw here*/
 #include "Sprites/block_piece.h"
-
+#include "Sprites/saintbasil.h"
+#include "Sprites/tetris_logo.h"
 typedef enum
 {
     TETROMINO_EMPTY = 0,
@@ -121,4 +122,5 @@ void drawGameField();
 void drawInfoUI();
 void drawStartGameMessage();
 void drawPausedGame();
+void updateScore();
 #endif

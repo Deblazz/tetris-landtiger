@@ -13,8 +13,8 @@ typedef enum{
 
 extern uint8_t gameField[20][10]; 
 extern uint8_t newTetromino[4][4];
-extern uint8_t newTetrominoXpos;
-extern uint8_t newTetrominoYpos;
+extern int newTetrominoXpos;
+extern int newTetrominoYpos;
 extern uint8_t newTetrominoRotation;
 extern uint32_t topScore;
 extern uint32_t currentScore;
@@ -32,5 +32,6 @@ void rotateTetromino();
 void moveRight();
 void moveLeftt();
 void dropTetromino();
-uint8_t isPositionValid(uint8_t newTetrominoXpos, uint8_t newTetrominoYpos, const uint8_t newTetromino[4][4]);
+void checkAndClearRows();
+uint8_t isPositionValid(int newTetrominoXpos, int newTetrominoYpos, const uint8_t newTetromino[4][4]);
 #endif

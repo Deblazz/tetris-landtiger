@@ -88,10 +88,11 @@ void drawSprite(uint16_t x, uint16_t y, uint16_t w, uint16_t h, uint8_t *pixel_s
 }
 
 void initUI()
-{
+{	
     drawInfoUI();
-	//drawGameField(); TODO:Check if unnecessary
 		drawStartGameMessage();
+		drawSprite(160, 200, 80, 85, (uint8_t *)saintbasil.pixel_data);
+
 }
 
 void updateUI(uint8_t Xpos, uint8_t Ypos)
@@ -142,7 +143,8 @@ void drawInfoUI()
     LCD_EmptyRect(0, 16, 154, 304, White, 2); // Adapted sizes to address white border
     LCD_FillRect(0, 0, 240, 16, Blue_UI);     // Drawing Top Bar
     LCD_FillRect(154, 16, 86, 304, Blue_UI);  // Drawing Side Score Bar
-
+		
+		GUI_Text(53, 0, (uint8_t *)"TETRIS", White, Blue_UI);
     GUI_Text(160, 20, (uint8_t *)"TOP", White, Blue_UI);
     sprintf(buffer, "%lu", (unsigned long)topScore);
     GUI_Text(160, 40, (uint8_t *)buffer, White, Blue_UI);
@@ -157,7 +159,7 @@ void drawInfoUI()
 }
 
 void drawStartGameMessage(){
-	GUI_Text(30, 100, (uint8_t *)"TETRIS", White, Black);
+	
 	GUI_Text(30, 120, (uint8_t *)"Press KEY1", White, Black);
 	GUI_Text(30, 140, (uint8_t *)"to start game", White, Black);
 }
@@ -172,4 +174,17 @@ void drawPausedGame(){
 	GUI_Text(30, 100, (uint8_t *)"GAME PAUSED", White, Black);
 	GUI_Text(30, 120, (uint8_t *)"Press KEY1", White, Black);
 	GUI_Text(30, 140, (uint8_t *)"to play", White, Black);
+}
+
+void updateScores(){
+	  char buffer[20];
+    sprintf(buffer, "%lu", (unsigned long)topScore);
+    GUI_Text(160, 40, (uint8_t *)buffer, White, Blue_UI);
+
+    sprintf(buffer, "%lu", (unsigned long)currentScore);
+    GUI_Text(160, 100, (uint8_t *)buffer, White, Blue_UI);
+
+    sprintf(buffer, "%lu", (unsigned long)clearedRows);
+    GUI_Text(160, 160, (uint8_t *)buffer, White, Blue_UI);
+
 }
