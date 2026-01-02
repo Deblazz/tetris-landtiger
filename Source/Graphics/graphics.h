@@ -1,53 +1,47 @@
 #ifndef GRAPHICS_H
 #define GRAPHICS_H
 
+#include "GLCD.h"
 #include <stdint.h>
 #include <stdio.h>
-#include "GLCD.h"
+
 
 /*Include every asset to draw here*/
 #include "Sprites/block_piece.h"
 #include "Sprites/saintbasil.h"
-#include "Sprites/tetris_logo.h"
-typedef enum
-{
-    TETROMINO_EMPTY = 0,
-    TETROMINO_O = 1,
-    TETROMINO_I = 2,
-    TETROMINO_T = 3,
-    TETROMINO_L = 4,
-    TETROMINO_J = 5,
-    TETROMINO_S = 6,
-    TETROMINO_Z = 7,
+typedef enum {
+  TETROMINO_EMPTY = 0,
+  TETROMINO_O = 1,
+  TETROMINO_I = 2,
+  TETROMINO_T = 3,
+  TETROMINO_L = 4,
+  TETROMINO_J = 5,
+  TETROMINO_S = 6,
+  TETROMINO_Z = 7,
 
-    NUM_TETROMINOS
+  NUM_TETROMINOS
 } TetrominoType;
 
-typedef struct
-{
-	uint8_t cells[4][4][4];
-	uint16_t color;
+typedef struct {
+  uint8_t cells[4][4][4];
+  uint16_t color;
 } Tetromino;
 
 static const Tetromino TETROMINOS[8] = {
     // Empty
     {
-        {
-            {{0, 0, 0, 0}, {0, 0, 0, 0}, {0, 0, 0, 0}, {0, 0, 0, 0}},
-            {{0, 0, 0, 0}, {0, 0, 0, 0}, {0, 0, 0, 0}, {0, 0, 0, 0}},
-            {{0, 0, 0, 0}, {0, 0, 0, 0}, {0, 0, 0, 0}, {0, 0, 0, 0}},
-            {{0, 0, 0, 0}, {0, 0, 0, 0}, {0, 0, 0, 0}, {0, 0, 0, 0}}
-        },
+        {{{0, 0, 0, 0}, {0, 0, 0, 0}, {0, 0, 0, 0}, {0, 0, 0, 0}},
+         {{0, 0, 0, 0}, {0, 0, 0, 0}, {0, 0, 0, 0}, {0, 0, 0, 0}},
+         {{0, 0, 0, 0}, {0, 0, 0, 0}, {0, 0, 0, 0}, {0, 0, 0, 0}},
+         {{0, 0, 0, 0}, {0, 0, 0, 0}, {0, 0, 0, 0}, {0, 0, 0, 0}}},
         Black // Color associated based on shape
     },
     // Yellow (O) - No Rotation
     {
-        {
-            {{1, 1, 0, 0}, {1, 1, 0, 0}, {0, 0, 0, 0}, {0, 0, 0, 0}},
-            {{1, 1, 0, 0}, {1, 1, 0, 0}, {0, 0, 0, 0}, {0, 0, 0, 0}},
-            {{1, 1, 0, 0}, {1, 1, 0, 0}, {0, 0, 0, 0}, {0, 0, 0, 0}},
-            {{1, 1, 0, 0}, {1, 1, 0, 0}, {0, 0, 0, 0}, {0, 0, 0, 0}}
-        },
+        {{{1, 1, 0, 0}, {1, 1, 0, 0}, {0, 0, 0, 0}, {0, 0, 0, 0}},
+         {{1, 1, 0, 0}, {1, 1, 0, 0}, {0, 0, 0, 0}, {0, 0, 0, 0}},
+         {{1, 1, 0, 0}, {1, 1, 0, 0}, {0, 0, 0, 0}, {0, 0, 0, 0}},
+         {{1, 1, 0, 0}, {1, 1, 0, 0}, {0, 0, 0, 0}, {0, 0, 0, 0}}},
         Yellow // Color associated based on shape
     },
     // Cyan (I)
@@ -63,10 +57,14 @@ static const Tetromino TETROMINOS[8] = {
     // Magenta (T)
     {
         {
-            {{0, 3, 0, 0}, {3, 3, 3, 0}, {0, 0, 0, 0}, {0, 0, 0, 0}}, // 0 deg (Up)
-            {{3, 0, 0, 0}, {3, 3, 0, 0}, {3, 0, 0, 0}, {0, 0, 0, 0}}, // 90 deg (Right)
-            {{3, 3, 3, 0}, {0, 3, 0, 0}, {0, 0, 0, 0}, {0, 0, 0, 0}}, // 180 deg (Down)
-            {{0, 3, 0, 0}, {3, 3, 0, 0}, {0, 3, 0, 0}, {0, 0, 0, 0}}  // 270 deg (Left)
+            {{0, 3, 0, 0}, {3, 3, 3, 0}, {0, 0, 0, 0}, {0, 0, 0, 0}}, // 0 deg
+                                                                      // (Up)
+            {{3, 0, 0, 0}, {3, 3, 0, 0}, {3, 0, 0, 0}, {0, 0, 0, 0}}, // 90 deg
+                                                                      // (Right)
+            {{3, 3, 3, 0}, {0, 3, 0, 0}, {0, 0, 0, 0}, {0, 0, 0, 0}}, // 180 deg
+                                                                      // (Down)
+            {{0, 3, 0, 0}, {3, 3, 0, 0}, {0, 3, 0, 0}, {0, 0, 0, 0}}  // 270 deg
+                                                                      // (Left)
         },
         Magenta // Color associated based on shape
     },
@@ -109,16 +107,18 @@ static const Tetromino TETROMINOS[8] = {
             {{0, 7, 0, 0}, {7, 7, 0, 0}, {7, 0, 0, 0}, {0, 0, 0, 0}}  // 270 deg
         },
         Red // Color associated based on shape
-    }
-};
+    }};
 void drawTetrominoSprite(uint16_t x, uint16_t y, uint16_t color_filter);
-void drawSprite(uint16_t x, uint16_t y, uint16_t w, uint16_t h, uint8_t *pixel_set);
-void drawTetrominoShape(uint16_t x, uint16_t y, TetrominoType type, uint8_t rotation);
+void drawSprite(uint16_t x, uint16_t y, uint16_t w, uint16_t h,
+                uint8_t *pixel_set);
+void drawTetrominoShape(uint16_t x, uint16_t y, TetrominoType type,
+                        uint8_t rotation);
 void clearTetromino(uint8_t newTetrominoXpos, uint8_t newTetrominoYpos);
 void initUI();
 void drawUpdateScore();
 void updateUI(uint8_t Xpos, uint8_t Ypos);
 void drawGameField();
+void drawEmptyGameField();
 void drawInfoUI();
 void drawStartGameMessage();
 void drawPausedGame();

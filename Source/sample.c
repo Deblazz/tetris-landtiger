@@ -1,8 +1,10 @@
-/****************************************Copyright (c)****************************************************
-**                                      
+/****************************************Copyright
+* (c)****************************************************
+**
 **                                 http://www.powermcu.com
 **
-**--------------File Info---------------------------------------------------------------------------------
+**--------------File
+* Info---------------------------------------------------------------------------------
 ** File name:               main.c
 ** Descriptions:            The GLCD application function
 **
@@ -21,33 +23,31 @@
 *********************************************************************************************************/
 
 /* Includes ------------------------------------------------------------------*/
-#include "LPC17xx.h"
-#include "GLCD/GLCD.h" 
-#include "TouchPanel/TouchPanel.h"
-#include "timer/timer.h"
-#include "Graphics/graphics.h"
+#include "GLCD/GLCD.h"
 #include "Game/game.h"
+#include "Graphics/graphics.h"
+#include "LPC17xx.h"
+#include "timer/timer.h"
+
 
 #ifdef SIMULATOR
-extern uint8_t ScaleFlag; // <- ScaleFlag needs to visible in order for the emulator to find the symbol (can be placed also inside system_LPC17xx.h but since it is RO, it needs more work)
+extern uint8_t
+    ScaleFlag; // <- ScaleFlag needs to visible in order for the emulator to
+               // find the symbol (can be placed also inside system_LPC17xx.h
+               // but since it is RO, it needs more work)
 #endif
 
-
-int main(void)
-{
-  SystemInit();  												/* System Initialization (i.e., PLL)  */
-	BUTTON_init();
+int main(void) {
+  SystemInit(); /* System Initialization (i.e., PLL)  */
+  BUTTON_init();
   LCD_Initialization();
-	
-  //TP_Init();
-	//TouchPanel_Calibrate();
-	
-	LCD_Clear(Black);
-	
-	initGame();
-	
-  while (1)	
-  {
+
+
+  LCD_Clear(Black);
+
+  initGame();
+
+  while (1) {
   }
 }
 
