@@ -240,8 +240,6 @@ void checkAndClearRows() {
       if (rowsCleared < 4)
         fullRowIndices[rowsCleared] = i;
       rowsCleared++;
-
-      // Show black line
     }
   }
   if (rowsCleared == 0)
@@ -250,6 +248,7 @@ void checkAndClearRows() {
   if (rowsCleared == 4) {
     animateTetrisEffect(fullRowIndices);
   } else {
+		//Show black lines
     for (k = 0; k < rowsCleared; k++) {
       LCD_FillRect(2, 18 + fullRowIndices[k] * BLOCK_PIECE_HEIGHT,
                    10 * BLOCK_PIECE_WIDTH, BLOCK_PIECE_HEIGHT, Black);

@@ -519,33 +519,6 @@
         </Group>
         <Group>
           <GroupName>CMSIS_core</GroupName>
-          <Files>
-            <File>
-              <FileName>cmsis_armclang.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\Source\CMSIS_core\cmsis_armclang.h</FilePath>
-            </File>
-            <File>
-              <FileName>cmsis_compiler.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\Source\CMSIS_core\cmsis_compiler.h</FilePath>
-            </File>
-            <File>
-              <FileName>cmsis_version.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\Source\CMSIS_core\cmsis_version.h</FilePath>
-            </File>
-            <File>
-              <FileName>core_cm3.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\Source\CMSIS_core\core_cm3.h</FilePath>
-            </File>
-            <File>
-              <FileName>mpu_armv7.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\Source\CMSIS_core\mpu_armv7.h</FilePath>
-            </File>
-          </Files>
         </Group>
         <Group>
           <GroupName>Sprites</GroupName>
@@ -615,11 +588,6 @@
         <Group>
           <GroupName>joystick</GroupName>
           <Files>
-            <File>
-              <FileName>funct_joystick.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\Source\joystick\funct_joystick.c</FilePath>
-            </File>
             <File>
               <FileName>lib_joystick.c</FileName>
               <FileType>1</FileType>
@@ -1095,33 +1063,6 @@
         </Group>
         <Group>
           <GroupName>CMSIS_core</GroupName>
-          <Files>
-            <File>
-              <FileName>cmsis_armclang.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\Source\CMSIS_core\cmsis_armclang.h</FilePath>
-            </File>
-            <File>
-              <FileName>cmsis_compiler.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\Source\CMSIS_core\cmsis_compiler.h</FilePath>
-            </File>
-            <File>
-              <FileName>cmsis_version.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\Source\CMSIS_core\cmsis_version.h</FilePath>
-            </File>
-            <File>
-              <FileName>core_cm3.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\Source\CMSIS_core\core_cm3.h</FilePath>
-            </File>
-            <File>
-              <FileName>mpu_armv7.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\Source\CMSIS_core\mpu_armv7.h</FilePath>
-            </File>
-          </Files>
         </Group>
         <Group>
           <GroupName>Sprites</GroupName>
@@ -1191,11 +1132,6 @@
         <Group>
           <GroupName>joystick</GroupName>
           <Files>
-            <File>
-              <FileName>funct_joystick.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\Source\joystick\funct_joystick.c</FilePath>
-            </File>
             <File>
               <FileName>lib_joystick.c</FileName>
               <FileType>1</FileType>

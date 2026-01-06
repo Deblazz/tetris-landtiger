@@ -53,12 +53,15 @@ void TIMER2_IRQHandler(void) {
   static int down_counter = 0;
   if ((LPC_GPIO1->FIOPIN & (1 << 29)) == 0) {
     rotateTetromino();
+		down_counter  = 0;
   } else if ((LPC_GPIO1->FIOPIN & (1 << 28)) == 0) {
     // Right
     moveRight();
+		down_counter = 0;
   } else if ((LPC_GPIO1->FIOPIN & (1 << 27)) == 0) {
     // Left
     moveLeft();
+		down_counter = 0;
   } else if ((LPC_GPIO1->FIOPIN & (1 << 26)) == 0) {
     down_counter++;
 

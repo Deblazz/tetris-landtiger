@@ -135,7 +135,6 @@ uint32_t init_timer(uint8_t timer_num, uint32_t TimerInterval) {
     // </h>
     // <<< end of configuration section >>>
 
-    NVIC_EnableIRQ(TIMER0_IRQn);
     return (1);
   } else if (timer_num == 1) {
     LPC_TIM1->MR0 = TimerInterval;
