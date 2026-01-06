@@ -184,11 +184,11 @@ void drawEndGame() {
 
   GUI_Text(90, 135, (uint8_t *)"SCORE", White, Blue_UI);
   sprintf(buffer, "%lu", (unsigned long)currentScore);
-  GUI_Text(100, 155, (uint8_t *)buffer, White, Blue_UI);
+  GUI_Text(102, 155, (uint8_t *)buffer, White, Blue_UI);
 
   GUI_Text(90, 175, (uint8_t *)"LINES", White, Blue_UI);
   sprintf(buffer, "%lu", (unsigned long)clearedRows);
-  GUI_Text(100, 195, (uint8_t *)buffer, White, Blue_UI);
+  GUI_Text(102, 195, (uint8_t *)buffer, White, Blue_UI);
 
   GUI_Text(40, 240, (uint8_t *)"Press KEY1 to", White, Blue_UI);
   GUI_Text(40, 260, (uint8_t *)"start over", White, Blue_UI);
