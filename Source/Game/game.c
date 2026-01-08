@@ -17,8 +17,8 @@ void resetGame() {
   init_timer(0, 0xFFFFFFFF); // Counts how long until unpause
   reset_timer(0);
   enable_timer(0);
-	
-	init_timer(2, 0x000927C0); // 50ms 
+
+  init_timer(2, 0x000927C0); // 50ms
   reset_timer(2);
   enable_timer(2);
 
@@ -45,15 +45,15 @@ void startGame() {
   reset_timer(1);
 
   // For joystick polling, 50ms
-  init_timer(2, 0x000927C0); 
-	reset_timer(2);
+  init_timer(2, 0x000927C0);
+  reset_timer(2);
   genRandomTetromino();
   updateUI(newTetrominoXpos, newTetrominoYpos);
 
   gameStatus = 1;
-	
-	enable_timer(1);
-	enable_timer(2);
+
+  enable_timer(1);
+  enable_timer(2);
 }
 
 void genRandomTetromino() {
@@ -244,7 +244,7 @@ void checkAndClearRows() {
   if (rowsCleared == 4) {
     animateTetrisEffect(fullRowIndices);
   } else {
-		//Show black lines
+    // Show black lines
     for (k = 0; k < rowsCleared; k++) {
       LCD_FillRect(2, 18 + fullRowIndices[k] * BLOCK_PIECE_HEIGHT,
                    10 * BLOCK_PIECE_WIDTH, BLOCK_PIECE_HEIGHT, Black);
@@ -313,14 +313,15 @@ void animateTetrisEffect(uint8_t rows[]) {
     if (bgColor == Yellow) {
       GUI_Text(textX, textY, (uint8_t *)"TETRIS!", textColor, bgColor);
     }
-		delay_ms(150);
+    delay_ms(150);
   }
 }
 
-void delay_ms(uint32_t ms){
-	volatile uint32_t i, j;
-	
-	for(i = 0; i < ms; i++){
-		for(j = 0; j <25000; j++) /*do nothing*/;
-	}
+void delay_ms(uint32_t ms) {
+  volatile uint32_t i, j;
+
+  for (i = 0; i < ms; i++) {
+    for (j = 0; j < 25000; j++) /*do nothing*/
+      ;
+  }
 }

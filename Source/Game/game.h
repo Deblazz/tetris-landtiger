@@ -5,7 +5,6 @@
 #include <stdlib.h>
 #include <string.h>
 
-
 typedef enum {
   PAUSE = 0,
   PLAY,

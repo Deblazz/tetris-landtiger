@@ -5,7 +5,6 @@
 #include <stdint.h>
 #include <stdio.h>
 
-
 /*Include every asset to draw here*/
 #include "Sprites/block_piece.h"
 #include "Sprites/saintbasil.h"

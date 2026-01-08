@@ -1,7 +1,6 @@
 #include "LPC17xx.h"
 #include "button.h"
 
-
 /**
  * @brief  Function that initializes Buttons
  */

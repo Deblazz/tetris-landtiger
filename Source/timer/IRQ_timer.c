@@ -12,9 +12,9 @@
 #include "LPC17xx.h"
 #include "timer.h"
 #include <string.h>
- 
+
 volatile int key1_debounce = 0;
-volatile int key2_debounce = 0;  
+volatile int key2_debounce = 0;
 /******************************************************************************
 ** Function name:		Timer0_IRQHandler
 **
@@ -51,55 +51,57 @@ void TIMER1_IRQHandler(void) {
 }
 
 void TIMER2_IRQHandler(void) {
-	LPC_TIM2->IR = 1;
-	static int down_counter = 0;
-	static int left_counter = 0;
-	static int right_counter = 0;
-	static int rotate_counter = 0;
-	
-	if (key1_debounce > 0) key1_debounce--;
-	if (key2_debounce > 0) key2_debounce--;
+  LPC_TIM2->IR = 1;
+  static int down_counter = 0;
+  static int left_counter = 0;
+  static int right_counter = 0;
+  static int rotate_counter = 0;
 
-	if(gameStatus == 1){
-		if ((LPC_GPIO1->FIOPIN & (1 << 29)) == 0) {
-			rotate_counter++;
-			if (rotate_counter > 8){
-				rotateTetromino();
-				rotate_counter = 0;
-			}
-		} else {
-			rotate_counter = 8;
-		}
+  if (key1_debounce > 0)
+    key1_debounce--;
+  if (key2_debounce > 0)
+    key2_debounce--;
 
-		if ((LPC_GPIO1->FIOPIN & (1 << 28)) == 0) {
-			right_counter++;
-			if(right_counter > 4){
-				moveRight();
-				right_counter = 0;
-			}
-		} else if ((LPC_GPIO1->FIOPIN & (1 << 27)) == 0) {
-			left_counter++;
-			if(left_counter > 4){
-				moveLeft();
-				left_counter = 0;
-			}
-		} else {
-			right_counter = 4;
-			left_counter = 4;
-		}
+  if (gameStatus == 1) {
+    if ((LPC_GPIO1->FIOPIN & (1 << 29)) == 0) {
+      rotate_counter++;
+      if (rotate_counter > 8) {
+        rotateTetromino();
+        rotate_counter = 0;
+      }
+    } else {
+      rotate_counter = 8;
+    }
 
-		if ((LPC_GPIO1->FIOPIN & (1 << 26)) == 0) {
-			down_counter++;
-			if (down_counter >= 20) {
-				movePieceDown();
-				down_counter = 0;
-				reset_timer(1);
-				enable_timer(1);
-			}
-		} else {
-			down_counter = 0;
-		}
-	}
+    if ((LPC_GPIO1->FIOPIN & (1 << 28)) == 0) {
+      right_counter++;
+      if (right_counter > 4) {
+        moveRight();
+        right_counter = 0;
+      }
+    } else if ((LPC_GPIO1->FIOPIN & (1 << 27)) == 0) {
+      left_counter++;
+      if (left_counter > 4) {
+        moveLeft();
+        left_counter = 0;
+      }
+    } else {
+      right_counter = 4;
+      left_counter = 4;
+    }
+
+    if ((LPC_GPIO1->FIOPIN & (1 << 26)) == 0) {
+      down_counter++;
+      if (down_counter >= 20) {
+        movePieceDown();
+        down_counter = 0;
+        reset_timer(1);
+        enable_timer(1);
+      }
+    } else {
+      down_counter = 0;
+    }
+  }
 }
 
 /******************************************************************************
