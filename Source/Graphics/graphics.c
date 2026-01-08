@@ -1,5 +1,5 @@
 #include "graphics.h"
-#include "game.h"
+#include "Game/game.h"
 
 void drawTetrominoShape(uint16_t x, uint16_t y, TetrominoType type,
                         uint8_t rotation) {

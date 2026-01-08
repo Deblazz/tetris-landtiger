@@ -37,6 +37,8 @@ extern uint8_t
                // but since it is RO, it needs more work)
 #endif
 
+volatile int start_flag = 0;
+
 int main(void) {
   SystemInit(); /* System Initialization (i.e., PLL)  */
   BUTTON_init();
@@ -45,9 +47,15 @@ int main(void) {
 
   LCD_Clear(Black);
 
-  initGame();
+  resetGame();
 
   while (1) {
+		if(gameStatus == 2 && start_flag){
+			start_flag = 0;
+			startGame();
+		}
+		
+		__WFI();
   }
 }
 

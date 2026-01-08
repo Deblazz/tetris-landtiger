@@ -1,5 +1,5 @@
 #include "game.h"
-#include "graphics.h"
+#include "Graphics/graphics.h"
 
 uint8_t gameField[20][10];
 uint8_t newTetromino[4][4];
@@ -14,9 +14,13 @@ uint16_t clearedRows;
 volatile GameStatus gameStatus;
 
 void resetGame() {
-  reset_timer(0);
   init_timer(0, 0xFFFFFFFF); // Counts how long until unpause
+  reset_timer(0);
   enable_timer(0);
+	
+	init_timer(2, 0x000927C0); // 50ms 
+  reset_timer(2);
+  enable_timer(2);
 
   memset(gameField, 0, sizeof(gameField));
   currentScore = 0;
@@ -37,25 +41,19 @@ void startGame() {
   LCD_FillRect(30, 100, 110, 150, Black);
 
   // Used as game clock
-  reset_timer(1);
   init_timer(1, 0x017D7840);
-  enable_timer(1);
+  reset_timer(1);
 
   // For joystick polling, 50ms
-  reset_timer(2);
-  init_timer(2, 0x000927C0);
-  enable_timer(2);
+  init_timer(2, 0x000927C0); 
+	reset_timer(2);
   genRandomTetromino();
   updateUI(newTetrominoXpos, newTetrominoYpos);
 
   gameStatus = 1;
-}
-void initGame() {
-  resetGame();
-  while (gameStatus == 2) {
-    __WFI();
-  }
-  startGame();
+	
+	enable_timer(1);
+	enable_timer(2);
 }
 
 void genRandomTetromino() {
@@ -178,14 +176,12 @@ void moveLeft() {
 }
 
 void pauseGame() {
-  disable_timer(2);
   disable_timer(1);
   drawPausedGame();
 }
 
 void unpauseGame() {
   updateUI(newTetrominoXpos, newTetrominoYpos);
-  enable_timer(2);
   enable_timer(1);
 }
 
@@ -317,5 +313,14 @@ void animateTetrisEffect(uint8_t rows[]) {
     if (bgColor == Yellow) {
       GUI_Text(textX, textY, (uint8_t *)"TETRIS!", textColor, bgColor);
     }
+		delay_ms(150);
   }
+}
+
+void delay_ms(uint32_t ms){
+	volatile uint32_t i, j;
+	
+	for(i = 0; i < ms; i++){
+		for(j = 0; j <25000; j++) /*do nothing*/;
+	}
 }

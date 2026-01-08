@@ -79,6 +79,7 @@ void reset_timer(uint8_t timer_num) {
 
 uint32_t init_timer(uint8_t timer_num, uint32_t TimerInterval) {
   if (timer_num == 0) {
+		LPC_SC->PCONP |= (1 << 1);
     LPC_TIM0->MR0 = TimerInterval;
 
     // <<< Use Configuration Wizard in Context Menu >>>
@@ -137,11 +138,13 @@ uint32_t init_timer(uint8_t timer_num, uint32_t TimerInterval) {
 
     return (1);
   } else if (timer_num == 1) {
+		LPC_SC->PCONP |= (1 << 2);
     LPC_TIM1->MR0 = TimerInterval;
     LPC_TIM1->MCR = 3;
     NVIC_EnableIRQ(TIMER1_IRQn);
     return (1);
   } else if (timer_num == 2) {
+		LPC_SC->PCONP |= (1 << 22);
     LPC_TIM2->MR0 = TimerInterval;
     LPC_TIM2->MCR = 3;
     NVIC_EnableIRQ(TIMER2_IRQn);

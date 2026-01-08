@@ -24,7 +24,6 @@ extern uint32_t currentScore;
 extern uint16_t clearedRows;
 extern volatile GameStatus gameStatus;
 
-void initGame();
 void endGame();
 void genRandomTetromino();
 uint8_t checkContact();
@@ -37,6 +36,7 @@ void checkAndClearRows();
 void startGame();
 void resetgame();
 void animateTetrisEffect(uint8_t rows[]);
+void delay_ms(uint32_t ms);
 uint8_t isPositionValid(int newTetrominoXpos, int newTetrominoYpos,
                         const uint8_t newTetromino[4][4]);
 #endif
