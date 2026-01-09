@@ -597,6 +597,56 @@
           </Files>
         </Group>
         <Group>
+          <GroupName>music</GroupName>
+          <Files>
+            <File>
+              <FileName>music.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\Source\music\music.c</FilePath>
+            </File>
+            <File>
+              <FileName>music.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\Source\music\music.h</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>RIT</GroupName>
+          <Files>
+            <File>
+              <FileName>RIT.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\Source\RIT\RIT.h</FilePath>
+            </File>
+            <File>
+              <FileName>lib_RIT.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\Source\RIT\lib_RIT.c</FilePath>
+            </File>
+            <File>
+              <FileName>IRQ_RIT.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\Source\RIT\IRQ_RIT.c</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>sounds</GroupName>
+          <Files>
+            <File>
+              <FileName>sounds.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\Source\sounds\sounds.c</FilePath>
+            </File>
+            <File>
+              <FileName>sounds.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\Source\sounds\sounds.h</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
           <GroupName>::CMSIS</GroupName>
         </Group>
       </Groups>
@@ -1137,6 +1187,56 @@
               <FileName>lib_joystick.c</FileName>
               <FileType>1</FileType>
               <FilePath>.\Source\joystick\lib_joystick.c</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>music</GroupName>
+          <Files>
+            <File>
+              <FileName>music.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\Source\music\music.c</FilePath>
+            </File>
+            <File>
+              <FileName>music.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\Source\music\music.h</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>RIT</GroupName>
+          <Files>
+            <File>
+              <FileName>RIT.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\Source\RIT\RIT.h</FilePath>
+            </File>
+            <File>
+              <FileName>lib_RIT.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\Source\RIT\lib_RIT.c</FilePath>
+            </File>
+            <File>
+              <FileName>IRQ_RIT.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\Source\RIT\IRQ_RIT.c</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>sounds</GroupName>
+          <Files>
+            <File>
+              <FileName>sounds.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\Source\sounds\sounds.c</FilePath>
+            </File>
+            <File>
+              <FileName>sounds.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\Source\sounds\sounds.h</FilePath>
             </File>
           </Files>
         </Group>

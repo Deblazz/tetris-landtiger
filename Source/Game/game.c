@@ -1,6 +1,7 @@
 #include "game.h"
 #include "Graphics/graphics.h"
-
+#include "sounds/sounds.h"
+#include "RIT/RIT.h"
 uint8_t gameField[20][10];
 uint8_t newTetromino[4][4];
 int newTetrominoXpos;
@@ -21,6 +22,9 @@ void resetGame() {
   init_timer(2, 0x000927C0); // 50ms
   reset_timer(2);
   enable_timer(2);
+	
+	disable_RIT();
+	disable_timer(3);
 
   memset(gameField, 0, sizeof(gameField));
   currentScore = 0;
@@ -43,6 +47,9 @@ void startGame() {
   // Used as game clock
   init_timer(1, 0x017D7840);
   reset_timer(1);
+	
+	resumeMusic(); 
+  enable_RIT();
 
   // For joystick polling, 50ms
   init_timer(2, 0x000927C0);
@@ -101,6 +108,7 @@ void lockTetromino() {
       if (newTetromino[i][j]) {
         gameField[newTetrominoYpos + i][newTetrominoXpos + j] =
             newTetromino[i][j];
+				playSound(SFX_PLACE, SFX_PLACE_SIZE);
       }
     }
   }
@@ -133,6 +141,7 @@ void lockTetromino() {
 void endGame() {
   disable_timer(1);
   disable_timer(2);
+	playSound(SFX_GAMEOVER, SFX_GAMEOVER_SIZE);
   gameStatus = 3;
   // Update topscore
   if (currentScore > topScore)
@@ -177,11 +186,13 @@ void moveLeft() {
 
 void pauseGame() {
   disable_timer(1);
+	disable_RIT();
   drawPausedGame();
 }
 
 void unpauseGame() {
   updateUI(newTetrominoXpos, newTetrominoYpos);
+	enable_RIT();
   enable_timer(1);
 }
 
@@ -277,8 +288,10 @@ void checkAndClearRows() {
   }
   if (rowsCleared == 4) {
     // tetris
+		playSound(SFX_TETRIS, SFX_TETRIS_SIZE);
     currentScore += 600;
   } else {
+		playSound(SFX_LINE, SFX_LINE_SIZE);
     currentScore += rowsCleared * 100;
   }
 
