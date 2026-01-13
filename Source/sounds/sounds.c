@@ -136,3 +136,4 @@ const int SFX_PLACE_SIZE = sizeof(SFX_PLACE) / sizeof(NOTE);
 const int SFX_LINE_SIZE = sizeof(SFX_LINE) / sizeof(NOTE);
 const int SFX_TETRIS_SIZE = sizeof(SFX_TETRIS) / sizeof(NOTE);
 const int SFX_GAMEOVER_SIZE = sizeof(SFX_GAMEOVER) / sizeof(NOTE);
+const int SFX_MALUS_SIZE = sizeof(SFX_MALUS) / sizeof(NOTE);

@@ -19,6 +19,9 @@ extern int SFX_TETRIS_SIZE;
 extern NOTE SFX_GAMEOVER[];
 extern int SFX_GAMEOVER_SIZE;
 
+extern NOTE SFX_MALUS[];
+extern int SFX_MALUS_SIZE;
+
 // --- DICHIARAZIONE FUNZIONI ---
 // Così game.c sa che questa funzione esiste in IRQ_RIT.c
 void playSound(NOTE* sfx_array, int size);

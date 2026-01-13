@@ -26,7 +26,7 @@ typedef struct {
   uint16_t color;
 } Tetromino;
 
-static const Tetromino TETROMINOS[8] = {
+static const Tetromino TETROMINOS[9] = {
     // Empty
     {
         {{{0, 0, 0, 0}, {0, 0, 0, 0}, {0, 0, 0, 0}, {0, 0, 0, 0}},
@@ -106,6 +106,11 @@ static const Tetromino TETROMINOS[8] = {
             {{0, 7, 0, 0}, {7, 7, 0, 0}, {7, 0, 0, 0}, {0, 0, 0, 0}}  // 270 deg
         },
         Red // Color associated based on shape
+				},// Grey, used for compatibility w/malus -> Not a real tetromino
+    {
+        {{}
+        },
+        Malus_Grey
     }};
 void drawTetrominoSprite(uint16_t x, uint16_t y, uint16_t color_filter);
 void drawSprite(uint16_t x, uint16_t y, uint16_t w, uint16_t h,

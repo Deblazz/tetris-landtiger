@@ -229,10 +229,56 @@ uint8_t isPositionValid(int newTetrominoXpos, int newTetrominoYpos,
   }
   return 1;
 }
+												
+void generate_malus(){
+	uint8_t i, j;
+	
+	//Check if adding a row would make the player lose
+	for(j = 0; j < 10; j++){
+		if(gameField[0][j]){
+			endGame();
+			return;
+		}
+	}
+		
+	//Upshifting the grid
+	for(i = 0; i < 19; i++){
+		for(j = 0; j < 10; j++){
+			gameField[i][j] = gameField[i+1][j];
+		}
+	}
+	
+	uint8_t first_hole = rand()%10;
+	uint8_t second_hole = rand()%10;
+	
+	while(second_hole == first_hole){
+		second_hole = rand()%10;
+	}
+	
+	uint8_t third_hole = rand()%10;
+	
+	while(third_hole == first_hole || third_hole == second_hole){
+		third_hole = rand()%10;
+	}
+	
+	for(j = 0; j < 10; j++){
+		if(j == first_hole || j == second_hole || j == third_hole){
+			gameField[19][j] = 0;
+		}else{
+			gameField[19][j] = 8;
+		}
+	
+	}
+		
+	playSound(SFX_MALUS, SFX_MALUS_SIZE);
+
+}
 
 void checkAndClearRows() {
   int i, j, k, rowsCleared = 0, rowIsFull;
   uint8_t fullRowIndices[4];
+	uint16_t currentTotal = clearedRows;
+  uint16_t newTotal = clearedRows + rowsCleared;
 
   for (i = 0; i < 20; i++) {
     rowIsFull = 1;
@@ -294,8 +340,16 @@ void checkAndClearRows() {
 		playSound(SFX_LINE, SFX_LINE_SIZE);
     currentScore += rowsCleared * 100;
   }
-
-  clearedRows += rowsCleared;
+	
+	//At this point I have certainly cleared lines thus I can check if I reached ten or multiples
+	currentTotal = clearedRows;
+  newTotal = clearedRows + rowsCleared;
+	
+	if ((newTotal/10) > (currentTotal/10)) {
+		generate_malus();
+	}
+	
+  clearedRows = newTotal;
   updateScores();
   drawGameField();
 }
@@ -349,3 +403,4 @@ void changeGameSpeed(short AD_current){
 		enable_timer(1);
 	}
 }
+
