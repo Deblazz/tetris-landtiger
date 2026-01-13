@@ -123,6 +123,21 @@ uint32_t get_timer_value(uint8_t timer_num) {
   }
 }
 
+//returns the correct threshold (how many ticks) to use for soft drop based on current game speed
+
+uint32_t get_dynamic_value(){
+	uint32_t gravity = LPC_TIM1->MR0;
+	uint32_t ticks = LPC_TIM2->MR0;
+	
+	uint32_t current_ratio = gravity / ticks;
+	
+	uint32_t dynamic_value = current_ratio / 2;
+	
+	dynamic_value = dynamic_value?dynamic_value:1; //Used as backup in case of dynamic_value 0 division
+	
+	return dynamic_value;
+}
+
 /******************************************************************************
 **                            End Of File
 ******************************************************************************/

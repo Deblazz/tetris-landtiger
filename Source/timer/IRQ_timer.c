@@ -25,6 +25,7 @@ uint16_t SinTable[45] = {
 
 // --- TIMER 0: Genera l'onda sonora ---
 void TIMER0_IRQHandler(void) {
+	   LPC_TIM0->IR = 1; // Clear Interrupt
     static int sineticks = 0;
     static int currentValue;
     
@@ -39,7 +40,6 @@ void TIMER0_IRQHandler(void) {
     sineticks++;
     if(sineticks == 45) sineticks = 0;
     
-    LPC_TIM0->IR = 1; // Clear Interrupt
 }
 /******************************************************************************
 ** Function name:		Timer1_IRQHandler
@@ -59,6 +59,8 @@ void TIMER1_IRQHandler(void) {
   }
   return;
 }
+
+//Timer 2 is used for Key debounce, joystick polling and pot polling
 
 void TIMER2_IRQHandler(void) {
   LPC_TIM2->IR = 1;
@@ -102,7 +104,7 @@ void TIMER2_IRQHandler(void) {
 
     if ((LPC_GPIO1->FIOPIN & (1 << 26)) == 0) {
       down_counter++;
-      if (down_counter >= 20) {
+      if (down_counter >= get_dynamic_value()) {
         movePieceDown();
         down_counter = 0;
         reset_timer(1);
@@ -111,6 +113,9 @@ void TIMER2_IRQHandler(void) {
     } else {
       down_counter = 0;
     }
+		
+		//Pot management
+		ADC_start_conversion();
   }
 }
 

@@ -5,6 +5,7 @@
 #include "timer/timer.h"
 
 
+
 #ifdef SIMULATOR
 extern uint8_t
     ScaleFlag; // <- ScaleFlag needs to visible in order for the emulator to
@@ -28,6 +29,7 @@ SystemInit();
   // --------------------------------
 
   BUTTON_init();
+	ADC_init();
   LCD_Initialization();
   LCD_Clear(Black);
 	init_timer(3, 0x017D7840);

@@ -338,3 +338,14 @@ void delay_ms(uint32_t ms) {
       ;
   }
 }
+
+void changeGameSpeed(short AD_current){
+	int newSpeed = 0x017D7840 - (AD_current * 4884); //Every step of 12b adc lowers the speed by 4884, so I subtract this to the initial value
+	
+	LPC_TIM1->MR0 = newSpeed; //Changing on the fly the speed of timer1
+
+	if(get_timer_value(1) >= newSpeed){
+		reset_timer(1);
+		enable_timer(1);
+	}
+}

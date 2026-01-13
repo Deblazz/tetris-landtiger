@@ -36,6 +36,7 @@ void startGame();
 void resetgame();
 void animateTetrisEffect(uint8_t rows[]);
 void delay_ms(uint32_t ms);
+void changeGameSpeed(short AD_current);
 uint8_t isPositionValid(int newTetrominoXpos, int newTetrominoYpos,
                         const uint8_t newTetromino[4][4]);
 #endif

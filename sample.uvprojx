@@ -17,8 +17,8 @@
         <TargetCommonOption>
           <Device>LPC1768</Device>
           <Vendor>NXP</Vendor>
-          <PackID>Keil.LPC1700_DFP.2.6.0</PackID>
-          <PackURL>http://www.keil.com/pack/</PackURL>
+          <PackID>Keil.LPC1700_DFP.2.7.2</PackID>
+          <PackURL>https://www.keil.com/pack/</PackURL>
           <Cpu>IRAM(0x10000000,0x8000) IRAM2(0x2007C000,0x8000) IROM(0x00000000,0x80000) CPUTYPE("Cortex-M3") CLOCK(12000000) ELITTLE</Cpu>
           <FlashUtilSpec></FlashUtilSpec>
           <StartupFile></StartupFile>
@@ -647,6 +647,26 @@
           </Files>
         </Group>
         <Group>
+          <GroupName>adc</GroupName>
+          <Files>
+            <File>
+              <FileName>adc.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\Source\adc\adc.h</FilePath>
+            </File>
+            <File>
+              <FileName>IRQ_adc.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\Source\adc\IRQ_adc.c</FilePath>
+            </File>
+            <File>
+              <FileName>lib_adc.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\Source\adc\lib_adc.c</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
           <GroupName>::CMSIS</GroupName>
         </Group>
       </Groups>
@@ -662,8 +682,8 @@
         <TargetCommonOption>
           <Device>LPC1768</Device>
           <Vendor>NXP</Vendor>
-          <PackID>Keil.LPC1700_DFP.2.6.0</PackID>
-          <PackURL>http://www.keil.com/pack/</PackURL>
+          <PackID>Keil.LPC1700_DFP.2.7.2</PackID>
+          <PackURL>https://www.keil.com/pack/</PackURL>
           <Cpu>IRAM(0x10000000,0x8000) IRAM2(0x2007C000,0x8000) IROM(0x00000000,0x80000) CPUTYPE("Cortex-M3") CLOCK(12000000) ELITTLE</Cpu>
           <FlashUtilSpec></FlashUtilSpec>
           <StartupFile></StartupFile>
@@ -1237,6 +1257,26 @@
               <FileName>sounds.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\Source\sounds\sounds.h</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>adc</GroupName>
+          <Files>
+            <File>
+              <FileName>adc.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\Source\adc\adc.h</FilePath>
+            </File>
+            <File>
+              <FileName>IRQ_adc.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\Source\adc\IRQ_adc.c</FilePath>
+            </File>
+            <File>
+              <FileName>lib_adc.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\Source\adc\lib_adc.c</FilePath>
             </File>
           </Files>
         </Group>

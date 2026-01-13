@@ -10,9 +10,11 @@ extern void enable_timer(uint8_t timer_num);
 extern void disable_timer(uint8_t timer_num);
 extern void reset_timer(uint8_t timer_num);
 extern uint32_t get_timer_value(uint8_t timer_num);
+extern uint32_t get_dynamic_value();
 /* IRQ_timer.c */
 extern void TIMER0_IRQHandler(void);
 extern void TIMER1_IRQHandler(void);
+
 
 #endif /* end __TIMER_H */
 /*****************************************************************************
