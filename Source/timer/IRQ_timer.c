@@ -5,6 +5,8 @@
 
 volatile int key1_debounce = 0;
 volatile int key2_debounce = 0;
+extern uint8_t timerPowerupSpeed;
+extern uint16_t powerup_counter_ticks;
 /******************************************************************************
 ** Function name:		Timer0_IRQHandler
 **
@@ -115,7 +117,18 @@ void TIMER2_IRQHandler(void) {
     }
 		
 		//Pot management
-		ADC_start_conversion();
+		if(timerPowerupSpeed){
+			powerup_counter_ticks ++;
+			//300*50ms =15s
+			if(powerup_counter_ticks >= 300){
+				timerPowerupSpeed = 0;
+				powerup_counter_ticks = 0;
+				ADC_start_conversion();
+			}
+		}else{
+			ADC_start_conversion();
+
+		}
   }
 }
 

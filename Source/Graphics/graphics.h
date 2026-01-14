@@ -7,6 +7,8 @@
 
 /*Include every asset to draw here*/
 #include "Sprites/block_piece.h"
+#include "Sprites/bombPowerUpPiece.h"
+#include "Sprites/clockPowerUpPiece.h"
 #include "Sprites/saintbasil.h"
 typedef enum {
   TETROMINO_EMPTY = 0,
@@ -107,9 +109,7 @@ static const Tetromino TETROMINOS[9] = {
         },
         Red // Color associated based on shape
 				},// Grey, used for compatibility w/malus -> Not a real tetromino
-    {
-        {{}
-        },
+    {{{}},
         Malus_Grey
     }};
 void drawTetrominoSprite(uint16_t x, uint16_t y, uint16_t color_filter);

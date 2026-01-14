@@ -110,19 +110,34 @@ void clearTetromino(uint8_t newTetrominoXpos, uint8_t newTetrominoYpos) {
   }
 }
 
+/*
+ this function manages to draw the whole board (maluses included) using the TETROMINOS array. The powerups are managed separately for sprite drawing reasons
+*/
 void drawGameField() {
   int i, j;
 
   for (i = 0; i < 20; i++) {
     for (j = 0; j < 10; j++) {
-      if (gameField[i][j]) {
-        drawTetrominoSprite(2 + j * BLOCK_PIECE_WIDTH,
-                            18 + i * BLOCK_PIECE_HEIGHT,
-                            TETROMINOS[gameField[i][j]].color);
-      } else {
-        LCD_FillRect(2 + j * BLOCK_PIECE_WIDTH, 18 + i * BLOCK_PIECE_HEIGHT,
-                     BLOCK_PIECE_WIDTH, BLOCK_PIECE_HEIGHT, Black);
-      }
+			
+			switch(gameField[i][j]){
+				case 0:
+					LCD_FillRect(2 + j * BLOCK_PIECE_WIDTH, 18 + i * BLOCK_PIECE_HEIGHT, BLOCK_PIECE_WIDTH, BLOCK_PIECE_HEIGHT, Black);
+				break;
+				
+				case 98:
+					//Half line cleared powerup
+					drawSprite(2 + j * BOMB_POWERUP_WIDTH, 18 + i * BOMB_POWERUP_HEIGHT, BOMB_POWERUP_WIDTH, BOMB_POWERUP_HEIGHT, (uint8_t *)BOMB_POWERUP_PIXEL_DATA);
+					break;
+				
+				case 99:
+					//Slow down powerup
+					drawSprite(2 + j * CLOCK_POWERUP_WIDTH, 18 + i * CLOCK_POWERUP_HEIGHT, CLOCK_POWERUP_WIDTH, CLOCK_POWERUP_HEIGHT, (uint8_t *)CLOCK_POWERUP_PIXEL_DATA);
+					break;
+				
+				default:
+					drawTetrominoSprite(2 + j * BLOCK_PIECE_WIDTH, 18 + i * BLOCK_PIECE_HEIGHT, TETROMINOS[gameField[i][j]].color);
+				break;
+			}
     }
   }
 }

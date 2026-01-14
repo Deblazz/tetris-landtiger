@@ -19,6 +19,9 @@ extern int SFX_TETRIS_SIZE;
 extern NOTE SFX_GAMEOVER[];
 extern int SFX_GAMEOVER_SIZE;
 
+extern NOTE SFX_POWERUP[];
+extern int SFX_POWERUP_SIZE;
+
 extern NOTE SFX_MALUS[];
 extern int SFX_MALUS_SIZE;
 
