@@ -15,7 +15,6 @@ extern uint32_t get_dynamic_value();
 extern void TIMER0_IRQHandler(void);
 extern void TIMER1_IRQHandler(void);
 
-
 #endif /* end __TIMER_H */
 /*****************************************************************************
 **                            End Of File

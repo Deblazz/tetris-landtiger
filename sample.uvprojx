@@ -597,16 +597,6 @@
           </Files>
         </Group>
         <Group>
-          <GroupName>joystick</GroupName>
-          <Files>
-            <File>
-              <FileName>lib_joystick.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\Source\joystick\lib_joystick.c</FilePath>
-            </File>
-          </Files>
-        </Group>
-        <Group>
           <GroupName>music</GroupName>
           <Files>
             <File>
@@ -673,6 +663,21 @@
               <FileName>lib_adc.c</FileName>
               <FileType>1</FileType>
               <FilePath>.\Source\adc\lib_adc.c</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>dac</GroupName>
+          <Files>
+            <File>
+              <FileName>dac.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\Source\dac\dac.h</FilePath>
+            </File>
+            <File>
+              <FileName>lib_dac.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\Source\dac\lib_dac.c</FilePath>
             </File>
           </Files>
         </Group>
@@ -1221,16 +1226,6 @@
           </Files>
         </Group>
         <Group>
-          <GroupName>joystick</GroupName>
-          <Files>
-            <File>
-              <FileName>lib_joystick.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\Source\joystick\lib_joystick.c</FilePath>
-            </File>
-          </Files>
-        </Group>
-        <Group>
           <GroupName>music</GroupName>
           <Files>
             <File>
@@ -1297,6 +1292,21 @@
               <FileName>lib_adc.c</FileName>
               <FileType>1</FileType>
               <FilePath>.\Source\adc\lib_adc.c</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>dac</GroupName>
+          <Files>
+            <File>
+              <FileName>dac.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\Source\dac\dac.h</FilePath>
+            </File>
+            <File>
+              <FileName>lib_dac.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\Source\dac\lib_dac.c</FilePath>
             </File>
           </Files>
         </Group>

@@ -18,30 +18,26 @@ extern uint16_t powerup_counter_ticks;
 ******************************************************************************/
 
 uint16_t SinTable[45] = {
-    410, 467, 523, 576, 627, 673, 714, 749, 778,
-    799, 813, 819, 817, 807, 789, 764, 732, 694, 
-    650, 602, 550, 495, 438, 381, 324, 270, 217,
-    169, 125, 87 , 55 , 30 , 12 , 2  , 0  , 6  ,   
-    20 , 41 , 70 , 105, 146, 193, 243, 297, 353
-};
+    410, 467, 523, 576, 627, 673, 714, 749, 778, 799, 813, 819, 817, 807, 789,
+    764, 732, 694, 650, 602, 550, 495, 438, 381, 324, 270, 217, 169, 125, 87,
+    55,  30,  12,  2,   0,   6,   20,  41,  70,  105, 146, 193, 243, 297, 353};
 
-// --- TIMER 0: Genera l'onda sonora ---
 void TIMER0_IRQHandler(void) {
-	   LPC_TIM0->IR = 1; // Clear Interrupt
-    static int sineticks = 0;
-    static int currentValue;
-    
-    // Logica DAC
-    currentValue = SinTable[sineticks];
-    currentValue -= 410;
-    currentValue /= 1; // Volume (dividi per 1 = max, per 2, 4, 8 abbassi)
-    currentValue += 410;
-    
-    LPC_DAC->DACR = currentValue << 6; // Scrive al DAC
-    
-    sineticks++;
-    if(sineticks == 45) sineticks = 0;
-    
+  LPC_TIM0->IR = 1; // Clear Interrupt
+  static int sineticks = 0;
+  static int currentValue;
+
+  // DAC management
+  currentValue = SinTable[sineticks];
+  currentValue -= 410;
+  currentValue /= 1; // Volume (currently max)
+  currentValue += 410;
+
+  LPC_DAC->DACR = currentValue << 6; // Dac write
+
+  sineticks++;
+  if (sineticks == 45)
+    sineticks = 0;
 }
 /******************************************************************************
 ** Function name:		Timer1_IRQHandler
@@ -62,7 +58,7 @@ void TIMER1_IRQHandler(void) {
   return;
 }
 
-//Timer 2 is used for Key debounce, joystick polling and pot polling
+// Timer 2 is used for Key debounce, joystick polling and pot polling
 
 void TIMER2_IRQHandler(void) {
   LPC_TIM2->IR = 1;
@@ -115,27 +111,25 @@ void TIMER2_IRQHandler(void) {
     } else {
       down_counter = 0;
     }
-		
-		//Pot management
-		if(timerPowerupSpeed){
-			powerup_counter_ticks ++;
-			//300*50ms =15s
-			if(powerup_counter_ticks >= 300){
-				timerPowerupSpeed = 0;
-				powerup_counter_ticks = 0;
-				ADC_start_conversion();
-			}
-		}else{
-			ADC_start_conversion();
 
-		}
+    // Pot management
+    if (timerPowerupSpeed) {
+      powerup_counter_ticks++;
+      // 300*50ms =15s
+      if (powerup_counter_ticks >= 300) {
+        timerPowerupSpeed = 0;
+        powerup_counter_ticks = 0;
+        ADC_start_conversion();
+      }
+    } else {
+      ADC_start_conversion();
+    }
   }
 }
 
 void TIMER3_IRQHandler(void) {
-    LPC_TIM3->IR = 1;      // Clear Flag
-    disable_timer(0);      // Zittisci Timer 0 (Spegni interrupt DAC)
-    // Timer 3 si ferma da solo grazie a MCR = 7
+  LPC_TIM3->IR = 1; // Clear Flag
+  disable_timer(0);
 }
 
 /******************************************************************************

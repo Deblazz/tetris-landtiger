@@ -18,10 +18,19 @@ uint16_t powerup_counter_ticks = 0;
 uint8_t timerPowerupSpeed = 0;
 volatile GameStatus gameStatus;
 
+//Used to reset pot speed control after powerup
+extern volatile int AD_last;
+
 void resetGame() {
   init_timer(0, 0xFFFFFFFF); // Counts how long until unpause
   reset_timer(0);
   enable_timer(0);
+
+  // Note length
+  init_timer(3, 0x017D7840);
+
+  // Iterate over notes
+  init_RIT(0x004C4B40);
 
   init_timer(2, 0x000927C0); // 50ms
   reset_timer(2);
@@ -126,7 +135,6 @@ void lockTetromino() {
     return;
   }
 
-  // check and update points -> TODO
   // Generate a new tetromino
   genRandomTetromino();
 
@@ -379,16 +387,17 @@ void manageBomb() {
   }
 }
 
-void manageTimer(){
-	if(get_timer_value(1) > 0x17D7840){
-	timerPowerupSpeed = 1;
-	LPC_TIM1->MR0 = 0x17D7840; // Changing on the fly the speed of timer1
+void manageTimer() {
+  timerPowerupSpeed = 1;
+	powerup_counter_ticks = 0;
+  LPC_TIM1->MR0 = 0x17D7840; // Changing on the fly the speed of timer1
 	
+	//to enable pot control after powerup
+	AD_last = 0xFF;
   if (get_timer_value(1) >= 0x17D7840) {
     reset_timer(1);
     enable_timer(1);
   }
-}
 }
 
 void checkAndClearRows() {
@@ -400,9 +409,9 @@ void checkAndClearRows() {
 
   for (i = 0; i < 20; i++) {
     rowIsFull = 1;
-		timerInThisRow = 0;
-		bombInThisRow = 0;
-		
+    timerInThisRow = 0;
+    bombInThisRow = 0;
+
     for (j = 0; j < 10; j++) {
       if (gameField[i][j] == 0) {
         rowIsFull = 0;
@@ -418,9 +427,11 @@ void checkAndClearRows() {
       if (rowsCleared < 4)
         fullRowIndices[rowsCleared] = i;
       rowsCleared++;
-			
-			if(bombInThisRow) takenBomb = 1;
-			if(timerInThisRow) takenTimer = 1;
+
+      if (bombInThisRow)
+        takenBomb = 1;
+      if (timerInThisRow)
+        takenTimer = 1;
     }
   }
   if (rowsCleared == 0)

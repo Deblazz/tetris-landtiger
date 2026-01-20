@@ -3,7 +3,7 @@
 
 #include "music/music.h"
 
-// --- DICHIARAZIONE ARRAY (Diciamo che esistono) ---
+// Sound effects
 extern NOTE BGM_TETRIS[];
 extern int BGM_SIZE;
 
@@ -24,9 +24,5 @@ extern int SFX_POWERUP_SIZE;
 
 extern NOTE SFX_MALUS[];
 extern int SFX_MALUS_SIZE;
-
-// --- DICHIARAZIONE FUNZIONI ---
-// Così game.c sa che questa funzione esiste in IRQ_RIT.c
-void playSound(NOTE* sfx_array, int size);
 
 #endif
